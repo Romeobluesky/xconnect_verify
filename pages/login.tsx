@@ -52,7 +52,7 @@ export default function LoginPage() {
               sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
             >
               <Typography variant="h4" align="center" gutterBottom>
-                로그인
+                LOGIN
               </Typography>
 
               {error && (
