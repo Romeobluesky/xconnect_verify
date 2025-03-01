@@ -7,11 +7,11 @@
     "npm": ">=10.2.3"
   },
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev -p 3002",
     "build": "rm -rf .next && next build",
-    "start": "next start -p 3001",
+    "start": "next start -p 3002",
     "lint": "next lint --fix",
-    "start:dev": "next dev -p 3001",
+    "start:dev": "next dev -p 3002",
     "seed": "npx tsx prisma/seed.ts",
     "db:reset": "ts-node prisma/reset-db.ts",
     "postinstall": "rm -rf node_modules/.prisma && npx prisma generate",
