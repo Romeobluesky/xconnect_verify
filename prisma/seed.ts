@@ -14,7 +14,7 @@ async function main() {
     await prisma.admin.create({
       data: {
         email: 'xconnect@xpowerint.com',
-        password: await hash('xpowerthffntus1!', 10),  // 비밀번호 해싱
+        password: await hash('thffntus1!', 10),  // 비밀번호 해싱
         name: '관리자',
         role: 'SUPER_ADMIN'
       }
