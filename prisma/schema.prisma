@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+// 관리자 계정 관리
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 라이선스 관리
+model License {
+  id           Int       @id @default(autoincrement())
+  programName  String
+  licenseKey   String    @unique
+  clientId     String
+  hardwareId   String?
+  userName     String?
+  isActive     Boolean   @default(true)
+  status       LicenseStatus @default(ISSUED)
+  activatedAt  DateTime?
+  expiresAt    DateTime?
+  lastCheckedAt DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  AuthLog      AuthLog[]
+}
+
+// 인증 로그
+model AuthLog {
+  id        Int      @id @default(autoincrement())
+  license   License  @relation(fields: [licenseId], references: [id])
+  licenseId Int
+  clientIp  String
+  status    Boolean  // 인증 성공/실패
+  message   String?
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+}
+
+enum LicenseStatus {
+  ISSUED    // 발급됨
+  IN_USE    // 사용중
+  STOPPED   // 정지
+}
