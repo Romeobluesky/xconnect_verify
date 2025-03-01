@@ -14,8 +14,6 @@ rm package-lock.json
 
 # 3. 의존성 설치
 npm install
-npm install sharp
-
 # 4. Prisma 생성
 npx prisma generate
 
