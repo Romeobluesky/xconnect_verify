@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: 'programs_certify',
+    name: 'xconnect-verify',
     script: 'npm',
     args: 'start',
     instances: 1,

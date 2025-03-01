@@ -39,7 +39,7 @@ export default function Sidebar() {
         alignItems: 'center'
       }}>
         <Image
-          src="/tnn_logo_top.png"
+          src="/recapvoice_title_squere.png"
           alt="Logo"
           width={100}
           height={0}

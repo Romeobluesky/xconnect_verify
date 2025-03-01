@@ -1,5 +1,5 @@
 {
-  "name": "programs_certify",
+  "name": "xconnect-verify",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@types/cookie": "^1.0.0",
-    "@types/node": "^20",
+    "@types/node": "^20.17.22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^8.57.0",
@@ -59,9 +59,25 @@
     "postcss": "^8",
     "prisma": "^6.3.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
-  }
+  },
+  "description": "Xpower Networks",
+  "main": "ecosystem.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Romeobluesky/xconnect_verify.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Romeobluesky/xconnect_verify/issues"
+  },
+  "homepage": "https://github.com/Romeobluesky/xconnect_verify#readme"
 }

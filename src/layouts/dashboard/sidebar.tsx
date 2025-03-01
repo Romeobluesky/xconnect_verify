@@ -65,7 +65,7 @@ export default function DashboardSidebar({ open, onClose }: DashboardSidebarProp
         <Box
           sx={{
             alignItems: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+            backgroundColor: 'rgba(255, 255, 255, 0.00)',
             cursor: 'pointer',
             display: 'flex',
             justifyContent: 'space-between',
@@ -76,15 +76,14 @@ export default function DashboardSidebar({ open, onClose }: DashboardSidebarProp
         >
         <Link href="/admin/dashboard">
           <Image
-            src="/tnn_logo_top.png"
+            src="/recapvoice_title_squere.png"
             alt="Logo"
             width={100}
             height={0}
             style={{
               width: '100%',
               height: 'auto',
-              maxWidth: '100px',
-              filter: 'invert(1)'
+              maxWidth: '100px'
             }}
           />
         </Link>
