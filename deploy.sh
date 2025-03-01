@@ -23,7 +23,7 @@ npx prisma generate
 NODE_ENV=production npm run build
 
 # 6. PM2 재시작
-pm2 delete programs_certify
+pm2 delete xconnect-verify
 pm2 start ecosystem.config.js
 
 echo "Deployment completed!"
