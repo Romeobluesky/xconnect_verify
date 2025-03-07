@@ -13,31 +13,35 @@ import { useState } from 'react';
 interface LicenseFormModalProps {
   open: boolean;
   onClose: () => void;
-  onSubmit: (data: { programName: string; clientId: string; expiresAt: Date }) => void;
+  onSubmit: (data: { programName: string; clientId: string; licenseKey: string; expiresAt: Date }) => void;
 }
 
 export default function LicenseFormModal({ open, onClose, onSubmit }: LicenseFormModalProps) {
   const [programName, setProgramName] = useState('');
   const [clientId, setClientId] = useState('');
+  const [licenseKey, setLicenseKey] = useState('');
   const [expiresAt, setExpiresAt] = useState<Date | null>(null);
 
   const handleSubmit = () => {
-    if (!programName || !clientId || !expiresAt) return;
+    if (!programName || !clientId || !licenseKey || !expiresAt) return;
 
     onSubmit({
       programName,
       clientId,
+      licenseKey,
       expiresAt
     });
 
     setProgramName('');
     setClientId('');
+    setLicenseKey('');
     setExpiresAt(null);
   };
 
   const handleClose = () => {
     setProgramName('');
     setClientId('');
+    setLicenseKey('');
     setExpiresAt(null);
     onClose();
   };
@@ -55,7 +59,14 @@ export default function LicenseFormModal({ open, onClose, onSubmit }: LicenseFor
             required
           />
           <TextField
-            label="클라이언트 ID"
+            label="라이선스 NO"
+            value={licenseKey}
+            onChange={(e) => setLicenseKey(e.target.value)}
+            fullWidth
+            required
+          />
+          <TextField
+            label="업체명"
             value={clientId}
             onChange={(e) => setClientId(e.target.value)}
             fullWidth
@@ -79,7 +90,7 @@ export default function LicenseFormModal({ open, onClose, onSubmit }: LicenseFor
         <Button
           onClick={handleSubmit}
           variant="contained"
-          disabled={!programName || !clientId || !expiresAt}
+          disabled={!programName || !clientId || !licenseKey || !expiresAt}
         >
           추가
         </Button>

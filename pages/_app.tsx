@@ -1,4 +1,5 @@
 import 'simplebar-react/dist/simplebar.min.css';
+import '../src/styles/globals.css';
 import { CacheProvider } from '@emotion/react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';

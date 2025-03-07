@@ -1,20 +1,19 @@
 import { prisma } from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { v4 as uuidv4 } from 'uuid';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: '허용되지 않는 메소드' });
   }
 
-  const { programName, clientId, expiresAt } = req.body;
+  const { programName, clientId, licenseKey, expiresAt } = req.body;
 
   try {
     const license = await prisma.license.create({
       data: {
         programName,
         clientId,
-        licenseKey: uuidv4(),
+        licenseKey,
         expiresAt: new Date(expiresAt),
         isActive: true
       }

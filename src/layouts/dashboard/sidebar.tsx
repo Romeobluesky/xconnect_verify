@@ -31,14 +31,14 @@ const items = [
     title: '사용자 관리'
   },
   {
-    href: '/admin/licenses',
-    icon: <KeyIcon sx={{ color: 'aqua' }} />,
-    title: '라이선스 관리'
-  },
-  {
     href: '/admin/logs',
     icon: <ListAltIcon sx={{ color: 'aqua' }} />,
     title: '프로그램 상태'
+  },  
+  {
+    href: '/admin/licenses',
+    icon: <KeyIcon sx={{ color: 'aqua' }} />,
+    title: '라이선스 관리'
   }
 ];
 

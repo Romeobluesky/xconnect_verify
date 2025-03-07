@@ -98,9 +98,15 @@ export default function LicenseManagement() {
     setPage(newPage);
   };
 
-  const handleBulkAdd = async (data: { programName: string; count: number; expiresAt: Date }) => {
+  const handleBulkAdd = async (data: Array<{
+    programName: string;
+    clientId: string;
+    licenseKey: string;
+    expiresAt: string;
+    createdAt: string;
+  }>) => {
     try {
-      const response = await fetch('/api/licenses', {
+      const response = await fetch('/api/licenses/bulk-import', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +114,7 @@ export default function LicenseManagement() {
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) throw new Error('라이선스 추가 실패');
+      if (!response.ok) throw new Error('라이선스 일괄 추가 실패');
 
       // 목록 새로고침
       const refreshResponse = await fetch(`/api/licenses?page=${page + 1}&limit=${rowsPerPage}`);
@@ -117,7 +123,7 @@ export default function LicenseManagement() {
       setTotalCount(refreshData.total);
       setIsBulkModalOpen(false);
     } catch (error) {
-      console.error('라이선스 추가 실패:', error);
+      console.error('라이선스 일괄 추가 실패:', error);
     }
   };
 
@@ -130,7 +136,7 @@ export default function LicenseManagement() {
       const allLicenses = data.licenses;
 
       // XLSX 형식의 데이터 생성
-      const header = ['프로그램', '클라이언트 ID', '라이선스 키', '상태', '인증일', '만료일', '생성일'];
+      const header = ['프로그램', '업체명', '라이선스 키', '상태', '인증일', '만료일', '생성일'];
       const rows = allLicenses.map((license: License) => [
         license.programName,
         license.clientId,
@@ -159,8 +165,8 @@ export default function LicenseManagement() {
       const text = await file.text();
       const rows = text.split('\n').filter(row => row.trim());
       const licenses = rows.slice(1).map(row => {
-        const [programName, clientId, expiresAt] = row.split(',');
-        return { programName, clientId, expiresAt };
+        const [programName, licenseKey, clientId, expiresAt] = row.split(',');
+        return { programName, licenseKey, clientId, expiresAt };
       });
 
       const response = await fetch('/api/licenses/import', {
@@ -185,7 +191,7 @@ export default function LicenseManagement() {
     }
   };
 
-  const handleSingleAdd = async (data: { programName: string; clientId: string; expiresAt: Date }) => {
+  const handleSingleAdd = async (data: { programName: string; clientId: string; licenseKey: string; expiresAt: Date }) => {
     try {
       const response = await fetch('/api/licenses/single', {
         method: 'POST',
@@ -277,7 +283,7 @@ export default function LicenseManagement() {
               sx={{ height: 40 }}
               onClick={() => setIsBulkModalOpen(true)}
             >
-              대량 추가
+              엑셀 가져오기
             </Button>
             <Button
               startIcon={<DownloadIcon />}
@@ -286,7 +292,7 @@ export default function LicenseManagement() {
               sx={{ height: 40 }}
               onClick={handleExport}
             >
-              내보내기
+              엑셀 내보내기
             </Button>
             <Button
               startIcon={<DeleteIcon />}
@@ -311,7 +317,7 @@ export default function LicenseManagement() {
           alignItems="center"
         >
           <TextField
-            placeholder="프로그램 이름 또는 클라이언트 ID로 검색"
+            placeholder="프로그램 이름 또는 업체명으로 검색"
             value={searchTerm}
             onChange={handleSearch}
             sx={{
@@ -379,7 +385,7 @@ export default function LicenseManagement() {
             <TableRow>
               <TableCell style={{ textAlign: 'center', fontWeight: 'bold' }}>프로그램</TableCell>
               <TableCell style={{ textAlign: 'center', fontWeight: 'bold' }}>라이선스 키</TableCell>
-              <TableCell style={{ textAlign: 'center', fontWeight: 'bold' }}>클라이언트 ID</TableCell>
+              <TableCell style={{ textAlign: 'center', fontWeight: 'bold' }}>업체명</TableCell>
               <TableCell style={{ textAlign: 'center', fontWeight: 'bold' }}>상태</TableCell>
               <TableCell style={{ textAlign: 'center', fontWeight: 'bold' }}>인증일</TableCell>
               <TableCell style={{ textAlign: 'center', fontWeight: 'bold' }}>만료일</TableCell>

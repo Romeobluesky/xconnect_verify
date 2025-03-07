@@ -41,7 +41,7 @@ export default function ImportLicenseModal({ open, onClose, onImport }: ImportLi
       <DialogContent>
         <Box sx={{ mt: 2 }}>
           <Alert severity="info" sx={{ mb: 2 }}>
-            CSV 파일 형식: 프로그램,클라이언트ID,만료일(YYYY-MM-DD)
+            CSV 파일 형식: 프로그램,라이선스NO,업체명,만료일(YYYY-MM-DD)
           </Alert>
           <input
             ref={fileInputRef}
