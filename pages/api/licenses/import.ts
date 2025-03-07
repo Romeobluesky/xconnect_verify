@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { v4 as uuidv4 } from 'uuid';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -11,12 +10,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const licenses = req.body;
 
     const createdLicenses = await prisma.$transaction(
-      licenses.map((license: { programName: string; clientId: string; expiresAt: string }) =>
+      licenses.map((license: { programName: string; clientId: string; licenseKey: string; expiresAt: string }) =>
         prisma.license.create({
           data: {
             programName: license.programName,
             clientId: license.clientId,
-            licenseKey: uuidv4(),
+            licenseKey: license.licenseKey,
             expiresAt: new Date(license.expiresAt),
             isActive: true
           }
